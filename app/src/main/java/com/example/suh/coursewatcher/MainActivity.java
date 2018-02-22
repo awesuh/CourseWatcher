@@ -10,7 +10,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String Owner = "CLARA BISHOP";
-        String Co_Owners = "Ben and Jose";
+        String Owner = "CLARA BISHOP"; // 403
+        String Co_Owners = "Ben and Jose"; // 404
     }
 }
