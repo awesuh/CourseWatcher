@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">CourseWatcher</string>
+    <string-array name="courseList">
+        <item>Necromancy 101</item>
+        <item>Computer Science 999</item>
+        <item>Defenestration 313</item>
+        <item>Basic Battle Strategy 101</item>
+        <item>Counter Intelligence 412</item>
+        <item>Chess 124</item>
+        <item>Basic Assassination 101</item>
+    </string-array>
+    <string-array name="sectionList">
+        <item>Necromancy 101–01</item>
+        <item>Necromancy 101–02</item>
+        <item>Necromancy 101–03</item>
+        <item>Necromancy 101–04</item>
+        <item>Necromancy 101–05</item>
+        <item>Necromancy 101–06</item>
+        <item>Necromancy 101–07</item>
+        <item>Necromancy 101–08</item>
+    </string-array>
+    <string-array name="searchResults">
+        <item>Arting 253</item>
+        <item>Arting 124</item>
+        <item>Arting 313</item>
+        <item>Arting 445</item>
+        <item>Arting 999</item>
+    </string-array>
 </resources>
