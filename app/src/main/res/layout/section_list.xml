@@ -9,22 +9,23 @@
 
     <ToggleButton
         android:id="@+id/subscribe_button"
-        android:layout_width="356dp"
-        android:layout_height="65dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="ToggleButton"
-        android:textOff="Subscribe"
-        android:textOn="Un-Subscribe"
+        android:checked="false"
+        android:text="@string/subscribe"
+        android:textOff="@string/subscribe"
+        android:textOn="@string/unsubscribe"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/listView2"
-        android:layout_width="354dp"
+        android:id="@+id/section_list"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"

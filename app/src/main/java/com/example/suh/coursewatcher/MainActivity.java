@@ -16,7 +16,9 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
         setContentView(R.layout.search_results);
+//        setContentView(R.layout.section_list);
 
         String Owner = "CLARA BISHOP";
         String Co_Owners = "Ben and Jose";

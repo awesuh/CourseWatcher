@@ -13,5 +13,4 @@ public class SectionListActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.section_list);
     }
-
 }
