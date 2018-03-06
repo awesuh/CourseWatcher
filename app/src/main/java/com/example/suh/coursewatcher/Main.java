@@ -11,7 +11,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity{
+public class Main extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
