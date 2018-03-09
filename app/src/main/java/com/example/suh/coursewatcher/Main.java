@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -19,6 +20,8 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 public class Main extends AppCompatActivity {
     SharedPreferences mPrefs  ;
     SharedPreferences.Editor prefsEditor ;
+
+    public static String TAG = "MyMain";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,9 @@ public class Main extends AppCompatActivity {
         prefsEditor = mPrefs.edit();
 
         getObject();
+
+        ApiWrapper apiWrapper = new ApiWrapper();
+        apiWrapper.example();
     }
 
     public User getObject(){

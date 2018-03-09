@@ -5,4 +5,7 @@ package com.example.suh.coursewatcher;
  */
 
 public class Course {
+    public String code;
+    public String des;
+    public String title;
 }

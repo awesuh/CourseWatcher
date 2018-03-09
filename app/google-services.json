@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "758050784913",
+    "firebase_url": "https://courseplanme.firebaseio.com",
+    "project_id": "courseplanme",
+    "storage_bucket": "courseplanme.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758050784913:android:f84217c1a3ecbf83",
+        "android_client_info": {
+          "package_name": "com.example.suh.coursewatcher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "758050784913-8ifuti75hl4ahou9457siv5aap6quvo2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVXt-oBg1_o8lb-Dlsl6gvlqKA7gITAUo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
