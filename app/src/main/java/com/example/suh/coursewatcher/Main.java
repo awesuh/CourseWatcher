@@ -1,5 +1,6 @@
 package com.example.suh.coursewatcher;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,14 +23,17 @@ public class Main extends AppCompatActivity {
     SharedPreferences mPrefs  ;
     SharedPreferences.Editor prefsEditor ;
 
+    public static final String EXTRA_MESSAGE = "com.example.suh.ScriptureSaver.MESSAGE";
+
     public static String TAG = "MyMain";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
-        setContentView(R.layout.search_results);
-//        setContentView(R.layout.section_list);
+//        setContentView(R.layout.search_results);
+        setContentView(R.layout.section_list);
+//        setContentView(R.layout.course_info);
 
         String Owner = "CLARA BISHOP";
         String Co_Owners = "Ben and Jose";
@@ -56,5 +61,15 @@ public class Main extends AppCompatActivity {
         String json = gson.toJson(user);
         prefsEditor.putString("user_settings", json);
         prefsEditor.commit();
+    }
+
+
+    public void sendMessage(View view){
+
+        Intent intent = new Intent(this, CourseInfoActivity.class);
+
+        //intent.putExtra(EXTRA_MESSAGE, course_code);
+
+        startActivity(intent);
     }
 }

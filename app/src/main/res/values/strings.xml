@@ -22,6 +22,51 @@
         <item>Necromancy 101–07</item>
         <item>Necromancy 101–08</item>
     </string-array>
+    <string-array name="sectionListCredits">
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="sectionListSchedules">
+        <item>MW 12:45 – 1:45 PM (04/23/2018 – 07/23/2018)</item>
+        <item>T 7:00 – 8:00 AM (04/23/2018 – 07/23/2018)</item>
+        <item>MWF 11:30 AM – 12:30 PM (04/23/2018 – 07/23/2018)</item>
+        <item>MTWR 7:45 – 8:45 AM, Ricks 225 (04/23/2018 – 07/23/2018) F 7:45 – 8:45 AM, Ricks 225 (04/23/2018 – 07/23/2018)</item>
+        <item>All day every day for the rest of your life</item>
+    </string-array>
+    <string-array name="sectionListInstructors">
+        <item>Griffin, Gerald J.</item>
+        <item>Ryan, Teresa J.</item>
+        <item>Bates, Byron Ray</item>
+        <item>Reynolds, Debra J</item>
+        <item>Staff (OL),</item>
+    </string-array>
+    <string-array name="sectionListSeats">
+        <item>15/26</item>
+        <item>91/100</item>
+        <item>26/26</item>
+        <item>5/25</item>
+        <item>*/*</item>
+    </string-array>
+    <string-array name="sectionListDescriptions">
+        <item>This course will teach students the fundamentals of theoretical and applied necromancy,
+            structural and proportional corpse reconstruction, madness and knowledge, necromancy vocabulary,
+            and basic resurrection.</item>
+        <item>This course will teach students the fundamentals of theoretical and applied necromancy,
+            structural and proportional corpse reconstruction, madness and knowledge, necromancy vocabulary,
+            and basic resurrection.</item>
+        <item>This course will teach students the fundamentals of theoretical and applied necromancy,
+            structural and proportional corpse reconstruction, madness and knowledge, necromancy vocabulary,
+            and basic resurrection.</item>
+        <item>This course will teach students the fundamentals of theoretical and applied necromancy,
+            structural and proportional corpse reconstruction, madness and knowledge, necromancy vocabulary,
+            and basic resurrection.</item>
+        <item>This course will teach students the fundamentals of theoretical and applied necromancy,
+            structural and proportional corpse reconstruction, madness and knowledge, necromancy vocabulary,
+            and basic resurrection.</item>
+    </string-array>
     <string-array name="searchResults">
         <item>Arting 253</item>
         <item>Arting 124</item>
