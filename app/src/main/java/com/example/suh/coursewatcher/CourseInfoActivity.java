@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.TextView;
 
 /**
@@ -24,7 +23,7 @@ public class CourseInfoActivity extends AppCompatActivity {
         //String course_code = intent.getStringExtra(Main.course_code);
 
         // Capture the layout's TextView and set the string as its text
-        TextView textView = findViewById(R.id.textView3);
+        TextView textView = findViewById(R.id.instructor_view);
         //textView.setText(scripture);
     }
 }

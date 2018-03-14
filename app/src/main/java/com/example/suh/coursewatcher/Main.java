@@ -30,9 +30,9 @@ public class Main extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
 //        setContentView(R.layout.search_results);
-        setContentView(R.layout.section_list);
+//        setContentView(R.layout.section_list);
 //        setContentView(R.layout.course_info);
 
         String Owner = "CLARA BISHOP";
@@ -47,6 +47,49 @@ public class Main extends AppCompatActivity {
 
         ApiWrapper apiWrapper = new ApiWrapper();
         apiWrapper.example();
+
+        // List view stuff
+        ArrayList<Instructor> instructors =  new ArrayList<Instructor>();
+        Instructor Nagash = new Instructor();
+        Nagash.first = "Nagash";
+        Nagash.last = "unknown";
+        Nagash.middle = "";
+        Nagash.email = "Nagash@outlook.edu";
+        Nagash.avgRating = 5;
+
+        ArrayList<RMPAccount> accounts = new ArrayList<RMPAccount>();
+        RMPAccount NagashRMP = new RMPAccount();
+        NagashRMP.id = 66;
+        NagashRMP.numRatings = 70000002;
+        accounts.add(NagashRMP);
+
+        Nagash.accounts = accounts;
+        instructors.add(Nagash);
+
+        ArrayList<Schedule> schedules = new ArrayList<>();
+        Schedule schedule = new Schedule();
+        schedule.endTime = "1:00AM";
+        schedule.startTime = "12:00PM";
+        schedule.location = "Sunny hill cemetery";
+        schedule.method = "face-to-face";
+        schedule.time = "(04/23/2018 – 07/23/2018)";
+        String m = "M";
+        String r = "R";
+        ArrayList<String> days = new ArrayList<>();
+        days.add(m);
+        days.add(r);
+        schedules.add(schedule);
+
+        Section one = new Section("Necromancy 101", "Basic Necromancy", 2, instructors, "unkown",
+                schedules, 99, 100, 1, "winter", "open");
+
+        ListView listView = (ListView) findViewById(R.id.subscribed_list);
+
+        ArrayList<Section> sectionList = new ArrayList<>();
+        sectionList.add(one);
+
+        SectionListAdapter adapter = new SectionListAdapter(this, R.layout.sectioned_list_view, sectionList);
+        listView.setAdapter(adapter);
     }
 
     public User getObject(){
