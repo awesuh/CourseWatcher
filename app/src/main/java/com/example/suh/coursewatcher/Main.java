@@ -30,9 +30,9 @@ public class Main extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
 //        setContentView(R.layout.search_results);
-//        setContentView(R.layout.section_list);
+        setContentView(R.layout.section_list);
 //        setContentView(R.layout.course_info);
 
         String Owner = "CLARA BISHOP";
@@ -49,7 +49,7 @@ public class Main extends AppCompatActivity {
         apiWrapper.example();
 
         // List view stuff
-        ArrayList<Instructor> instructors =  new ArrayList<Instructor>();
+       /* ArrayList<Instructor> instructors =  new ArrayList<Instructor>();
         Instructor Nagash = new Instructor();
         Nagash.first = "Nagash";
         Nagash.last = "unknown";
@@ -89,7 +89,7 @@ public class Main extends AppCompatActivity {
         sectionList.add(one);
 
         SectionListAdapter adapter = new SectionListAdapter(this, R.layout.sectioned_list_view, sectionList);
-        listView.setAdapter(adapter);
+        listView.setAdapter(adapter);*/
     }
 
     public User getObject(){
@@ -106,13 +106,4 @@ public class Main extends AppCompatActivity {
         prefsEditor.commit();
     }
 
-
-    public void sendMessage(View view){
-
-        Intent intent = new Intent(this, CourseInfoActivity.class);
-
-        //intent.putExtra(EXTRA_MESSAGE, course_code);
-
-        startActivity(intent);
-    }
 }
