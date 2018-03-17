@@ -49,7 +49,7 @@ public class Main extends AppCompatActivity {
         apiWrapper.example();
 
         // List view stuff
-       /* ArrayList<Instructor> instructors =  new ArrayList<Instructor>();
+        ArrayList<Instructor> instructors =  new ArrayList<Instructor>();
         Instructor Nagash = new Instructor();
         Nagash.first = "Nagash";
         Nagash.last = "unknown";
@@ -83,13 +83,14 @@ public class Main extends AppCompatActivity {
         Section one = new Section("Necromancy 101", "Basic Necromancy", 2, instructors, "unkown",
                 schedules, 99, 100, 1, "winter", "open");
 
-        ListView listView = (ListView) findViewById(R.id.subscribed_list);
-
-        ArrayList<Section> sectionList = new ArrayList<>();
-        sectionList.add(one);
-
-        SectionListAdapter adapter = new SectionListAdapter(this, R.layout.sectioned_list_view, sectionList);
-        listView.setAdapter(adapter);*/
+        // This id does not exist anymore, so commenting out the rest of this
+//        ListView listView = (ListView) findViewById(R.id.subscribed_list);
+//
+//        ArrayList<Section> sectionList = new ArrayList<>();
+//        sectionList.add(one);
+//
+//        SectionListAdapter adapter = new SectionListAdapter(this, R.layout.sectioned_list_view, sectionList);
+//        listView.setAdapter(adapter);
     }
 
     public User getObject(){
