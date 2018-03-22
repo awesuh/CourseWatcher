@@ -3,7 +3,9 @@ package com.example.suh.coursewatcher;
 import java.util.ArrayList;
 
 /**
- * Created by benjameep on 3/9/18.
+ * <h1>Schedule</h1>
+ *
+ * Schedule specifies the sections location in time and space
  */
 
 public class Schedule {

@@ -123,22 +123,23 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="TextView"
+                android:text="1"
                 android:textAlignment="center"
                 android:textSize="30sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="1" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/TeacherName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Ramond, Rolley"
                 android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/Days"
                 app:layout_constraintStart_toEndOf="@+id/SectionNum"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -156,33 +157,30 @@
                 android:id="@+id/Time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
-                android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/Days"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="3:00 - 3:45 pm" />
+                android:text="3:00 - 3:45 pm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/Days"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
-                android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/TeacherName"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="MWF" />
+                android:text="MWF"
+                app:layout_constraintEnd_toStartOf="@+id/Time"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/Method"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="TextView"
+                android:text="Lecture"
                 app:layout_constraintStart_toEndOf="@+id/Location"
-                tools:layout_editor_absoluteY="27dp"
-                tools:text="Lecture" />
+                app:layout_constraintTop_toBottomOf="@+id/Days" />
 
         </android.support.constraint.ConstraintLayout>
 
