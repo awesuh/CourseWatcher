@@ -3,7 +3,10 @@ package com.example.suh.coursewatcher;
 import java.util.ArrayList;
 
 /**
- * Created by Enano on 3/5/18.
+ * <h1>Section</h1>
+ *
+ * Contains all of the section information,
+ * watchout for sections that contain more than one instructor or schedules
  */
 
 public class Section {
