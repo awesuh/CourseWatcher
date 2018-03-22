@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by Suh on 3/3/2018.
+ * <h1>class SearchResultsActivity</h1>
+ * <p>This activity handles the logic associated with the search result interface</p>
  */
-
 public class SearchResultsActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {

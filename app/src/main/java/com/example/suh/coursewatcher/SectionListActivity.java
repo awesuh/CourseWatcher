@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by Suh on 3/3/2018.
+ * <h1>class SectionListActivity</h1>
+ * <p>This activity handles the logic associated with the the section list interface</p>
  */
-
 public class SectionListActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {

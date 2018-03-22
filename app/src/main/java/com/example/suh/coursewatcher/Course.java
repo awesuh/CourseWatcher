@@ -1,7 +1,8 @@
 package com.example.suh.coursewatcher;
 
 /**
- * Created by Enano on 3/5/18.
+ * <h1>class Course</h1>
+ * <p>This class contains the course code, description, and title</p>
  */
 
 public class Course {

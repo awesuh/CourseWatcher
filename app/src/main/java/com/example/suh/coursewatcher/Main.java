@@ -19,6 +19,10 @@ import java.util.List;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
+/**
+ * <h1>class Main</h1>
+ * <p>The apps main class. This class manages the app</p>
+ */
 public class Main extends AppCompatActivity {
     SharedPreferences mPrefs  ;
     SharedPreferences.Editor prefsEditor ;
@@ -27,6 +31,12 @@ public class Main extends AppCompatActivity {
 
     public static String TAG = "MyMain";
 
+    /**
+     * <h1>>On Create</h1
+     * <p>This function sets the view and handles other tasks necessary on start-up</p>
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +103,12 @@ public class Main extends AppCompatActivity {
 //        listView.setAdapter(adapter);
     }
 
+    /**
+     * <h1>getObject</h1>
+     * <p>This function converts json into a user object</p>
+     *
+     * @return user object
+     */
     public User getObject(){
         Gson gson = new Gson();
         String json = mPrefs.getString("user_settings", "");
@@ -100,6 +116,12 @@ public class Main extends AppCompatActivity {
         return obj;
     }
 
+    /**
+     * <h1>saveObject</h1>
+     * <p>this function converts json into a user object and saves it</p>
+     *
+     * @param user
+     */
     public void saveObject(User user){
         Gson gson = new Gson();
         String json = gson.toJson(user);

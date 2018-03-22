@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Suh on 3/10/2018.
+ * <h1>class SectionListAdapter</h1>
+ * <p>This class sections off the list view it is applied to</p>
  */
 
 class SectionListAdapter extends ArrayAdapter<Section> {
@@ -30,6 +31,14 @@ class SectionListAdapter extends ArrayAdapter<Section> {
         this.resource = resource;
     }
 
+    /**
+     * <h1>getView</h1>
+     * <p>This function contains the logic for sectioning off the listView</p>
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
