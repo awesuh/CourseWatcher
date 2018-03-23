@@ -7,6 +7,8 @@ package com.example.suh.coursewatcher;
  * A single professor may have more than one RMPAccount, hence the need for it to be in it's own class
  */
 public class RMPAccount {
+    public static final String TAG = "RMPAccount";
+
     public int id;
     public int numRatings;
 }

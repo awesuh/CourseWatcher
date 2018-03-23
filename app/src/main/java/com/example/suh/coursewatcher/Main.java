@@ -1,17 +1,25 @@
 package com.example.suh.coursewatcher;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -54,9 +62,6 @@ public class Main extends AppCompatActivity {
         prefsEditor = mPrefs.edit();
 
         getObject();
-
-        ApiWrapper apiWrapper = new ApiWrapper();
-        apiWrapper.example();
 
         // List view stuff
         ArrayList<Instructor> instructors =  new ArrayList<Instructor>();
@@ -101,6 +106,22 @@ public class Main extends AppCompatActivity {
 //
 //        SectionListAdapter adapter = new SectionListAdapter(this, R.layout.sectioned_list_view, sectionList);
 //        listView.setAdapter(adapter);
+
+        ApiWrapper.getSections("2018;SP","FDREL275",new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for(DataSnapshot sectionSnapshot : snapshot.getChildren()){
+                    Section section = sectionSnapshot.getValue(Section.class);
+                    addSection(section);
+                }
+//                Course course = snapshot.getValue(Course.class);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        });
     }
 
     /**
@@ -129,4 +150,31 @@ public class Main extends AppCompatActivity {
         prefsEditor.commit();
     }
 
+    public void addSection(Section section){
+        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        ViewGroup parent = findViewById(R.id.TheList);
+        View sectionView = layoutInflater.inflate(R.layout.section, (ViewGroup) parent, false);
+
+        ((TextView) sectionView.findViewById(R.id.SectionNum)).setText(Integer.toString(section.section));
+
+        String instructorName = section.instructors.get(0).last + ", " + section.instructors.get(0).first;
+        ((TextView) sectionView.findViewById(R.id.TeacherName)).setText(instructorName);
+        ((RatingBar) sectionView.findViewById(R.id.TeacherRating)).setRating((int) section.instructors.get(0).avgRating);
+
+        ((TextView) sectionView.findViewById(R.id.Location)).setText(section.schedules.get(0).location);
+        ((TextView) sectionView.findViewById(R.id.Time)).setText(section.schedules.get(0).time);
+        ((TextView) sectionView.findViewById(R.id.Method)).setText(section.schedules.get(0).method);
+        String days = "";
+        if(section.schedules.get(0).days != null){
+            for(String day : section.schedules.get(0).days){
+                if(day != null){
+                    days += day;
+                }
+            }
+        }
+        ((TextView) sectionView.findViewById(R.id.Days)).setText(days);
+
+        parent.addView(sectionView);
+        Log.d(TAG,"Added "+section.code);
+    }
 }

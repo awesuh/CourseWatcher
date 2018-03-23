@@ -1,6 +1,8 @@
 package com.example.suh.coursewatcher;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -9,10 +11,16 @@ import java.util.ArrayList;
  * rate my professor account</p>
  */
 public class Instructor {
+    public static final String TAG = "Instructor";
+
     public String first;
     public String last;
     public String middle;
     public String email;
     public float avgRating;
     public ArrayList<RMPAccount> accounts;
+
+    public Instructor() {
+//        Log.d(TAG,"Creating an Instructor");
+    }
 }

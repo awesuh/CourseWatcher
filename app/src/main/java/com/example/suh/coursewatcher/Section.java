@@ -1,5 +1,10 @@
 package com.example.suh.coursewatcher;
 
+import android.content.Context;
+import android.support.constraint.ConstraintLayout;
+import android.util.Log;
+import android.view.LayoutInflater;
+
 import java.util.ArrayList;
 
 /**
@@ -10,6 +15,8 @@ import java.util.ArrayList;
  */
 
 public class Section {
+    public static final String TAG = "Section";
+
     public String code;
     public String course;
     public int credits;
@@ -23,12 +30,12 @@ public class Section {
     public String status;
 
     public Section(){
-
+//        Log.d(TAG,"Creating a section");
     }
 
     public Section(String code, String course, int credits, ArrayList<Instructor> instructors,
                    String name, ArrayList<Schedule> schedules, int seatsFilled, int seatsTotal,
-                   int section, String session, String status){
+                   int section, String session, String status) {
         this.code = code;
         this.course = course;
         this.credits = credits;
