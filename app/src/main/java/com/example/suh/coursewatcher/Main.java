@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -122,6 +125,14 @@ public class Main extends AppCompatActivity {
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
             }
         });
+
+        //HyperLink stuff
+
+        TextView HyperLink = (TextView)findViewById(R.id.TeacherName);
+        Spanned text = Html.fromHtml("<a href='http://www.ratemyprofessors.com/'>Test, Teacher</a>");
+
+        HyperLink.setMovementMethod(LinkMovementMethod.getInstance());
+        HyperLink.setText(text);
     }
 
     /**
@@ -157,7 +168,7 @@ public class Main extends AppCompatActivity {
 
         ((TextView) sectionView.findViewById(R.id.SectionNum)).setText(Integer.toString(section.section));
 
-        String instructorName = section.instructors.get(0).last + ", " + section.instructors.get(0).first;
+        /*String instructorName = section.instructors.get(0).last + ", " + section.instructors.get(0).first;
         ((TextView) sectionView.findViewById(R.id.TeacherName)).setText(instructorName);
         ((RatingBar) sectionView.findViewById(R.id.TeacherRating)).setRating((int) section.instructors.get(0).avgRating);
 
@@ -175,6 +186,6 @@ public class Main extends AppCompatActivity {
         ((TextView) sectionView.findViewById(R.id.Days)).setText(days);
 
         parent.addView(sectionView);
-        Log.d(TAG,"Added "+section.code);
+        Log.d(TAG,"Added "+section.code);*/
     }
 }

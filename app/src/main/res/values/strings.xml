@@ -74,4 +74,6 @@
         <item>Arting 445</item>
         <item>Arting 999</item>
     </string-array>
+    <string name="testLink">http://www.ratemyprofessors.com/</string>
+    <string name="placeholder">Test, Teacher</string>
 </resources>
