@@ -60,64 +60,55 @@ public class Main extends AppCompatActivity {
         String Co_Owners = "Ben and Jose";
         String THE_Ownerjk = "Jose...";
 
-        //Hi
         mPrefs = getDefaultSharedPreferences(this);
         prefsEditor = mPrefs.edit();
 
-        getObject();
 
-        // List view stuff
-        ArrayList<Instructor> instructors =  new ArrayList<Instructor>();
-        Instructor Nagash = new Instructor();
-        Nagash.first = "Nagash";
-        Nagash.last = "unknown";
-        Nagash.middle = "";
-        Nagash.email = "Nagash@outlook.edu";
-        Nagash.avgRating = 5;
+        loadCourse("FDREL275","2018;SP");
+    }
 
-        ArrayList<RMPAccount> accounts = new ArrayList<RMPAccount>();
-        RMPAccount NagashRMP = new RMPAccount();
-        NagashRMP.id = 66;
-        NagashRMP.numRatings = 70000002;
-        accounts.add(NagashRMP);
+    /**
+     * <h1>loadUser</h1>
+     * <p>This function converts json into a user object</p>
+     *
+     * @return user object
+     */
+    public User loadUser(){
+        Gson gson = new Gson();
+        String json = mPrefs.getString("user_settings", "");
+        User obj = gson.fromJson(json, User.class);
+        return obj;
+    }
 
-        Nagash.accounts = accounts;
-        instructors.add(Nagash);
+    /**
+     * <h1>saveUser</h1>
+     * <p>this function converts json into a user object and saves it</p>
+     *
+     * @param user
+     */
+    public void saveUser(User user){
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
+        prefsEditor.putString("user_settings", json);
+        prefsEditor.commit();
+    }
 
-        ArrayList<Schedule> schedules = new ArrayList<>();
-        Schedule schedule = new Schedule();
-        schedule.endTime = "1:00AM";
-        schedule.startTime = "12:00PM";
-        schedule.location = "Sunny hill cemetery";
-        schedule.method = "face-to-face";
-        schedule.time = "(04/23/2018 – 07/23/2018)";
-        String m = "M";
-        String r = "R";
-        ArrayList<String> days = new ArrayList<>();
-        days.add(m);
-        days.add(r);
-        schedules.add(schedule);
+    public void addCourse(Course course){
+        // Set course code
+        ((TextView) findViewById(R.id.course_code)).setText(course.code);
+        // Set code title
+        ((TextView) findViewById(R.id.course_title)).setText(course.title);
+        // Set description
+        ((TextView) findViewById(R.id.description)).setText(course.des);
+    }
 
-        Section one = new Section("Necromancy 101", "Basic Necromancy", 2, instructors, "unkown",
-                schedules, 99, 100, 1, "winter", "open");
-
-        // This id does not exist anymore, so commenting out the rest of this
-//        ListView listView = (ListView) findViewById(R.id.subscribed_list);
-//
-//        ArrayList<Section> sectionList = new ArrayList<>();
-//        sectionList.add(one);
-//
-//        SectionListAdapter adapter = new SectionListAdapter(this, R.layout.sectioned_list_view, sectionList);
-//        listView.setAdapter(adapter);
-
-        ApiWrapper.getSections("2018;SP","FDREL275",new ValueEventListener() {
+    private void loadCourse(String courseCode, String semester){
+        // Load the course information
+        ApiWrapper.getCourse(courseCode,new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                for(DataSnapshot sectionSnapshot : snapshot.getChildren()){
-                    Section section = sectionSnapshot.getValue(Section.class);
-                    addSection(section);
-                }
-//                Course course = snapshot.getValue(Course.class);
+                Course course = snapshot.getValue(Course.class);
+                addCourse(course);
             }
 
             @Override
@@ -126,39 +117,21 @@ public class Main extends AppCompatActivity {
             }
         });
 
-        //HyperLink stuff
+        // Load all of the sections
+        ApiWrapper.getSections(semester,courseCode,new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for(DataSnapshot sectionSnapshot : snapshot.getChildren()){
+                    Section section = sectionSnapshot.getValue(Section.class);
+                    addSection(section);
+                }
+            }
 
-        TextView HyperLink = (TextView)findViewById(R.id.TeacherName);
-        Spanned text = Html.fromHtml("<a href='http://www.ratemyprofessors.com/'>Test, Teacher</a>");
-
-        HyperLink.setMovementMethod(LinkMovementMethod.getInstance());
-        HyperLink.setText(text);
-    }
-
-    /**
-     * <h1>getObject</h1>
-     * <p>This function converts json into a user object</p>
-     *
-     * @return user object
-     */
-    public User getObject(){
-        Gson gson = new Gson();
-        String json = mPrefs.getString("user_settings", "");
-        User obj = gson.fromJson(json, User.class);
-        return obj;
-    }
-
-    /**
-     * <h1>saveObject</h1>
-     * <p>this function converts json into a user object and saves it</p>
-     *
-     * @param user
-     */
-    public void saveObject(User user){
-        Gson gson = new Gson();
-        String json = gson.toJson(user);
-        prefsEditor.putString("user_settings", json);
-        prefsEditor.commit();
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        });
     }
 
     public void addSection(Section section){
@@ -166,26 +139,51 @@ public class Main extends AppCompatActivity {
         ViewGroup parent = findViewById(R.id.TheList);
         View sectionView = layoutInflater.inflate(R.layout.section, (ViewGroup) parent, false);
 
+        // Set the Section Number
         ((TextView) sectionView.findViewById(R.id.SectionNum)).setText(Integer.toString(section.section));
 
-        /*String instructorName = section.instructors.get(0).last + ", " + section.instructors.get(0).first;
-        ((TextView) sectionView.findViewById(R.id.TeacherName)).setText(instructorName);
-        ((RatingBar) sectionView.findViewById(R.id.TeacherRating)).setRating((int) section.instructors.get(0).avgRating);
-
-        ((TextView) sectionView.findViewById(R.id.Location)).setText(section.schedules.get(0).location);
-        ((TextView) sectionView.findViewById(R.id.Time)).setText(section.schedules.get(0).time);
-        ((TextView) sectionView.findViewById(R.id.Method)).setText(section.schedules.get(0).method);
-        String days = "";
-        if(section.schedules.get(0).days != null){
-            for(String day : section.schedules.get(0).days){
-                if(day != null){
-                    days += day;
-                }
+        // Set the Instructor Information
+        if(section.instructors != null && !section.instructors.isEmpty()){
+            // Build Name
+            String instructorName = section.instructors.get(0).last + ", " + section.instructors.get(0).first;
+            // Get Name Element
+            TextView NameElement = sectionView.findViewById(R.id.TeacherName);
+            if(section.instructors.get(0).accounts != null && !section.instructors.get(0).accounts.isEmpty()){
+                // Set Rating
+                ((RatingBar) sectionView.findViewById(R.id.TeacherRating)).setRating((int) section.instructors.get(0).avgRating);
+                //HyperLink stuff
+                NameElement.setMovementMethod(LinkMovementMethod.getInstance());
+                Spanned text = Html.fromHtml("<a href='http://www.ratemyprofessors.com/ShowRatings.jsp?tid="+
+                        section.instructors.get(0).accounts.get(0).id+"'>"+instructorName+"</a>");
+                NameElement.setText(text);
+            } else {
+                // Just set the name
+                NameElement.setText(instructorName);
             }
         }
-        ((TextView) sectionView.findViewById(R.id.Days)).setText(days);
 
+        // Set the Schedule Information
+        if(section.schedules != null && !section.schedules.isEmpty()){
+            // Set Location
+            ((TextView) sectionView.findViewById(R.id.Location)).setText(section.schedules.get(0).location);
+            // Set Time
+            ((TextView) sectionView.findViewById(R.id.Time)).setText(section.schedules.get(0).time);
+            // Set
+            ((TextView) sectionView.findViewById(R.id.Method)).setText(section.schedules.get(0).method);
+            String days = "";
+            if(section.schedules.get(0).days != null){
+                for(String day : section.schedules.get(0).days){
+                    if(day != null && !day.isEmpty()){
+                        days += day;
+                    }
+                }
+            }
+            ((TextView) sectionView.findViewById(R.id.Days)).setText(days);
+        }
+
+        // Add everything to the screen
         parent.addView(sectionView);
-        Log.d(TAG,"Added "+section.code);*/
+
+        Log.d(TAG,"Added "+section.code);
     }
 }

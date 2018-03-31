@@ -76,4 +76,5 @@
     </string-array>
     <string name="testLink">http://www.ratemyprofessors.com/</string>
     <string name="placeholder">Test, Teacher</string>
+    <string name="credits">Credits:</string>
 </resources>
