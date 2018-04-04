@@ -63,10 +63,8 @@ public class Main extends AppCompatActivity {
         mPrefs = getDefaultSharedPreferences(this);
         prefsEditor = mPrefs.edit();
 
-//        Intent intentBundle = new Intent(this,SectionListActivity.class);
-//        intentBundle.putExtra("course","FDREL275");
-//        intentBundle.putExtra("semester","2018;SP");
-//        startActivity(intentBundle);
+
+        // loadCourse("FDREL275","2018;SP");
     }
 
     /**
@@ -95,7 +93,16 @@ public class Main extends AppCompatActivity {
         prefsEditor.commit();
     }
 
+    public void callSectionList(View view) {
 
+        Intent intent = new Intent(this, SectionListActivity.class);
 
+        String courseCode = "CS246";
+        String semester = "2018;SP";
+        intent.putExtra("courseCode", courseCode);
+        intent.putExtra("semester", semester);
+
+        startActivity(intent);
+    }
 
 }
