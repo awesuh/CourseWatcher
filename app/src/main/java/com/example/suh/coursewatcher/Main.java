@@ -51,9 +51,9 @@ public class Main extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
 //        setContentView(R.layout.search_results);
-        setContentView(R.layout.section_list);
+//        setContentView(R.layout.section_list);
 //        setContentView(R.layout.course_info);
 
         String Owner = "CLARA BISHOP";
@@ -63,8 +63,10 @@ public class Main extends AppCompatActivity {
         mPrefs = getDefaultSharedPreferences(this);
         prefsEditor = mPrefs.edit();
 
-
-        loadCourse("FDREL275","2018;SP");
+//        Intent intentBundle = new Intent(this,SectionListActivity.class);
+//        intentBundle.putExtra("course","FDREL275");
+//        intentBundle.putExtra("semester","2018;SP");
+//        startActivity(intentBundle);
     }
 
     /**
@@ -93,97 +95,7 @@ public class Main extends AppCompatActivity {
         prefsEditor.commit();
     }
 
-    public void addCourse(Course course){
-        // Set course code
-        ((TextView) findViewById(R.id.course_code)).setText(course.code);
-        // Set code title
-        ((TextView) findViewById(R.id.course_title)).setText(course.title);
-        // Set description
-        ((TextView) findViewById(R.id.description)).setText(course.des);
-    }
 
-    private void loadCourse(String courseCode, String semester){
-        // Load the course information
-        ApiWrapper.getCourse(courseCode,new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                Course course = snapshot.getValue(Course.class);
-                addCourse(course);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-            }
-        });
 
-        // Load all of the sections
-        ApiWrapper.getSections(semester,courseCode,new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for(DataSnapshot sectionSnapshot : snapshot.getChildren()){
-                    Section section = sectionSnapshot.getValue(Section.class);
-                    addSection(section);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-            }
-        });
-    }
-
-    public void addSection(Section section){
-        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        ViewGroup parent = findViewById(R.id.TheList);
-        View sectionView = layoutInflater.inflate(R.layout.section, (ViewGroup) parent, false);
-
-        // Set the Section Number
-        ((TextView) sectionView.findViewById(R.id.SectionNum)).setText(Integer.toString(section.section));
-
-        // Set the Instructor Information
-        if(section.instructors != null && !section.instructors.isEmpty()){
-            // Build Name
-            String instructorName = section.instructors.get(0).last + ", " + section.instructors.get(0).first;
-            // Get Name Element
-            TextView NameElement = sectionView.findViewById(R.id.TeacherName);
-            if(section.instructors.get(0).accounts != null && !section.instructors.get(0).accounts.isEmpty()){
-                // Set Rating
-                ((RatingBar) sectionView.findViewById(R.id.TeacherRating)).setRating((int) section.instructors.get(0).avgRating);
-                //HyperLink stuff
-                NameElement.setMovementMethod(LinkMovementMethod.getInstance());
-                Spanned text = Html.fromHtml("<a href='http://www.ratemyprofessors.com/ShowRatings.jsp?tid="+
-                        section.instructors.get(0).accounts.get(0).id+"'>"+instructorName+"</a>");
-                NameElement.setText(text);
-            } else {
-                // Just set the name
-                NameElement.setText(instructorName);
-            }
-        }
-
-        // Set the Schedule Information
-        if(section.schedules != null && !section.schedules.isEmpty()){
-            // Set Location
-            ((TextView) sectionView.findViewById(R.id.Location)).setText(section.schedules.get(0).location);
-            // Set Time
-            ((TextView) sectionView.findViewById(R.id.Time)).setText(section.schedules.get(0).time);
-            // Set
-            ((TextView) sectionView.findViewById(R.id.Method)).setText(section.schedules.get(0).method);
-            String days = "";
-            if(section.schedules.get(0).days != null){
-                for(String day : section.schedules.get(0).days){
-                    if(day != null && !day.isEmpty()){
-                        days += day;
-                    }
-                }
-            }
-            ((TextView) sectionView.findViewById(R.id.Days)).setText(days);
-        }
-
-        // Add everything to the screen
-        parent.addView(sectionView);
-
-        Log.d(TAG,"Added "+section.code);
-    }
 }
