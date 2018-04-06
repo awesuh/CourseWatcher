@@ -2,6 +2,7 @@ package com.example.suh.coursewatcher;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -11,12 +12,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 /**
  * <h1>class SectionListActivity</h1>
@@ -24,7 +30,10 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class SectionListActivity extends AppCompatActivity{
 
-    String TAG = "SectionListActivity";
+    public String TAG = "SectionListActivity";
+    private User user;
+    private String courseCode;
+    private String semester;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +41,29 @@ public class SectionListActivity extends AppCompatActivity{
         setContentView(R.layout.section_list);
 
         Intent intent = getIntent();
-        String courseCode = intent.getStringExtra("courseCode");
-        String semester = intent.getStringExtra("semester");
+        courseCode = intent.getStringExtra("courseCode");
+        semester = intent.getStringExtra("semester");
 
         loadCourse(courseCode, semester);
+
+        user = loadUser();
+        if(user == null){
+            user = new User();
+        }
+        ToggleButton toggleButton = (ToggleButton) findViewById(R.id.subscribe_button) ;
+        toggleButton.setChecked(user.courses.contains(courseCode));
+
+        toggleButton.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton toggleButton, boolean isChecked) {
+                if(isChecked){
+                    user.courses.add(courseCode);
+                } else {
+                    user.courses.remove(courseCode);
+                }
+                saveUser(user);
+            }
+        });
     }
 
     public void addCourse(Course course){
@@ -130,5 +158,34 @@ public class SectionListActivity extends AppCompatActivity{
         parent.addView(sectionView);
 
         Log.d(TAG,"Added "+section.code);
+    }
+
+    /**
+     * <h1>loadUser</h1>
+     * <p>This function converts json into a user object</p>
+     *
+     * @return user object
+     */
+    public User loadUser(){
+        Gson gson = new Gson();
+        SharedPreferences mPrefs = getDefaultSharedPreferences(this);
+        String json = mPrefs.getString("user_settings", "");
+        User obj = gson.fromJson(json, User.class);
+        return obj;
+    }
+
+    /**
+     * <h1>saveUser</h1>
+     * <p>this function converts json into a user object and saves it</p>
+     *
+     * @param user
+     */
+    public void saveUser(User user){
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
+        SharedPreferences mPrefs = getDefaultSharedPreferences(this);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        prefsEditor.putString("user_settings", json);
+        prefsEditor.apply();
     }
 }
